@@ -67,4 +67,4 @@ def get_income_after_tax(income, self_employed):
     print(income - income_tax - fica_tax)
 
 
-get_income_after_tax(250000, False)
+get_income_after_tax(1000000, False)
