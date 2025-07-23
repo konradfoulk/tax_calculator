@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from tax_calculator import income
+from tax_calculator import find_required_income
 
 
 def calculate():
@@ -10,7 +10,7 @@ def calculate():
         d = float(desired_income.get())*12
 
     s = self_employed.get()
-    i = income(s, d)
+    i = find_required_income(d, s)
 
     if required_period.get() == 'annual':
         required_income.set(str(round(i, 2)))
