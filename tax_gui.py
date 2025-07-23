@@ -3,6 +3,7 @@ from tkinter import ttk
 from tax_calculator import find_required_income
 
 
+# find required income and populate into GUI
 def calculate():
     if desired_period.get() == 'annual':
         d = float(desired_income.get())
@@ -20,6 +21,7 @@ def calculate():
     etr.set(round(((i-d)/i)*100))
 
 
+# define Tkinter GUI
 root = Tk()
 root.title('Tax Calculator')
 options = ['annual', 'annual', 'monthly']
@@ -55,4 +57,5 @@ ttk.Label(root, text='%').grid(column=5, row=3, sticky=W)
 
 ttk.Button(root, text='Calculate', command=calculate).grid(column=6, row=4)
 
+# run Tkinter GUI
 root.mainloop()
