@@ -23,7 +23,7 @@ def calculate():
 
 # define Tkinter GUI
 root = Tk()
-root.title('Tax Calculator')
+root.title('Tax Calculator (single, standard deduction)')
 options = ['annual', 'annual', 'monthly']
 
 self_employed = BooleanVar()
