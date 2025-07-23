@@ -1,3 +1,5 @@
+# define tax information in one place
+standard_deduction = 14600
 brackets = [
     (0, 11600, 0.10),
     (11600, 47150, 0.12),
@@ -7,16 +9,21 @@ brackets = [
     (243725, 609350, 0.35),
     (609350, float('inf'), 0.37)
 ]
+ss = 0.124
+medicare = 0.029
+additonal_medicare_rate = 0.009
+ss_wage_limit = 168600
+medicare_threshold = 200000
 
 
+# find federal income tax amount
 def get_income_tax(gross_income):
-    standard_deduction = 14600
-
     taxable_income = gross_income - standard_deduction
     tax = 0
     for lower, upper, rate in brackets:
         if taxable_income > lower:
-            bracket_slice = min(upper, taxable_income) - lower
+            bracket_slice = min(upper, taxable_income) - \
+                lower  # min handles full brackets
             tax += bracket_slice * rate
         else:
             break
@@ -24,44 +31,53 @@ def get_income_tax(gross_income):
     return tax
 
 
-def get_fica_tax(income, self_employed):
-    if self_employed:
-        ss_rate = 0.124
-        medicare_rate = 0.029
-    else:
-        ss_rate = 0.062
-        medicare_rate = 0.0145
+# find FICA tax amount
+def get_fica_tax(income, self_employed=False):
+    if self_employed:  # self employed persons pay full FICA tax
+        ss_rate = ss
+        medicare_rate = medicare
+    else:  # half of FICA is paid  by employers for employed persons
+        ss_rate = ss / 2
+        medicare_rate = medicare / 2
 
-    ss_tax = min(income, 168600) * ss_rate
+    # min handles income over wage limit
+    ss_tax = min(income, ss_wage_limit) * ss_rate
     medicare_tax = income * medicare_rate
-    if income > 200000:
-        threshold_slice = income - 200000
-        medicare_tax += threshold_slice * 0.009
+    if income > medicare_threshold:  # additional medicare tax is applied to income over the threshold
+        threshold_slice = income - medicare_threshold
+        # all must pay full additional tax
+        medicare_tax += threshold_slice * additonal_medicare_rate
 
     return ss_tax + medicare_tax
 
 
-def get_after_tax_income(income):
+# find income after tax
+def get_taxed_income(income, self_employed=False):
     income_tax = get_income_tax(income)
-    fica_tax = get_fica_tax(income, False)
+    fica_tax = get_fica_tax(income, self_employed)
 
     return income - income_tax - fica_tax
 
 
-def find_after_tax_income(desired_income, tolerance=1):
+# find required income before tax for an inputted desired income
+def find_required_income(desired_income, self_employed=False, tolerance=1):
+    highest_rate = brackets[-1][-1]
+
+    # using binary search to search through solutions to the after tax income
     low = desired_income
-    high = desired_income / (1 - brackets[-1][-1])
-    while (high - low) > tolerance:
-        mid = (low + high) / 2
-        mid_after_tax = get_after_tax_income(mid)
-        if mid_after_tax < desired_income:
-            low = mid
-        else:
+    high = desired_income / (1 - highest_rate)
+    while (high - low) >= tolerance:  # finding exact match causes infinite loop, tolerance handles this
+        mid = (high + low) / 2
+        if get_taxed_income(mid, self_employed) > desired_income:
             high = mid
+        else:
+            low = mid
     return high
 
 
-required_income = find_after_tax_income(600000)
-print(required_income)
-after_tax_income = get_after_tax_income(required_income)
-print(after_tax_income)
+print(find_required_income(60000))
+print(find_required_income(72000))
+print(find_required_income(84000))
+print(find_required_income(96000))
+print(find_required_income(108000))
+print(find_required_income(120000))
