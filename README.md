@@ -10,13 +10,13 @@ Desktop GUI
 - Simple user interface using the TKinter library in **Python**
 
 Self-employed toggle
-- Toggle your employment status to determine if you are subject to the self employment tax (full FICA)
+- Toggle your employment status to determine if you are subject to the self employment tax (full FICA).
 
 Toggle between monthly and anuall income (input and output)
 - Set the units to match the way you see your goals.
 
 Effective tax rate
-- See what the effect tax percentage is on the income you desire.
+- See what the effective tax percentage is on the income you desire.
 
 ---
 ### Download
