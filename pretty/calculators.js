@@ -1,12 +1,12 @@
 const standardDeduciton = 14600
 const brackets = [
-    (0, 11600, 0.10),
-    (11600, 47150, 0.12),
-    (47150, 100525, 0.22),
-    (100525, 191950, 0.24),
-    (191950, 243725, 0.32),
-    (243725, 609350, 0.35),
-    (609350, Infinity, 0.37)
+    [0, 11600, 0.10],
+    [11600, 47150, 0.12],
+    [47150, 100525, 0.22],
+    [100525, 191950, 0.24],
+    [191950, 243725, 0.32],
+    [243725, 609350, 0.35],
+    [609350, Infinity, 0.37]
 ]
 const ss = 0.124
 const medicare = 0.029
@@ -18,7 +18,7 @@ function getIncomeTax(grossIncome) {
     const taxableIncome = grossIncome - standardDeduciton
     let tax = 0
 
-    for (let [lower, upper, rate] in brackets) {
+    for (let [lower, upper, rate] of brackets) {
         if (taxableIncome > lower) {
             let bracketSlice = Math.min(upper, taxableIncome) - lower
             tax += bracketSlice * rate
@@ -59,13 +59,13 @@ export function findTaxedIncome(income, selfEmployed) {
 }
 
 export function findRequiredIncome(desiredIncome, selfEmployed, tolerance = 0.001) {
-    const highestRate = brackets[-1][-1]
+    const highestRate = brackets.at(-1).at(-1)
 
     let low = desiredIncome
     let high = desiredIncome / (1 - highestRate)
     while ((high - low) >= tolerance) {
         let mid = (high + low) / 2
-        if (getTaxedIncome(mid, selfEmployed) > desiredIncome) {
+        if (findTaxedIncome(mid, selfEmployed) > desiredIncome) {
             high = mid
         } else {
             low = mid
