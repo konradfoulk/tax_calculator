@@ -1,5 +1,8 @@
 import { findTaxedIncome, findRequiredIncome } from './calculators.js'
 
+let afterTaxBtn = document.querySelector('#afterTaxBtn')
+let reqBtn = document.querySelector('#reqBtn')
+
 let afterTaxCalc = document.querySelector('#afterTaxCalc')
 let reqCalc = document.querySelector('#reqCalc')
 
@@ -38,11 +41,17 @@ selfEmployed.addEventListener('change', () => {
     calculateRequired()
 })
 
-document.querySelector('#afterTaxBtn').addEventListener('click', () => {
+afterTaxBtn.addEventListener('click', () => {
     afterTaxCalc.style.display = 'block'
     reqCalc.style.display = 'none'
+
+    afterTaxBtn.classList.add('active')
+    reqBtn.classList.remove('active')
 })
-document.querySelector('#reqBtn').addEventListener('click', () => {
+reqBtn.addEventListener('click', () => {
     reqCalc.style.display = 'block'
     afterTaxCalc.style.display = 'none'
+
+    reqBtn.classList.add('active')
+    afterTaxBtn.classList.remove('active')
 })

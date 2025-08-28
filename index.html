@@ -11,45 +11,47 @@
 
 <body>
     <div class="app">
-        <button id="afterTaxBtn">Income After Tax</button><button id="reqBtn">Required Income</button>
-        <div>
-            <input type="checkbox" name="selfEmployed" id="selfEmployed">
-            <label for="selfEmployed">Self employed</label>
-        </div>
-        <div id="afterTaxCalc">
+        <button id="afterTaxBtn" class="active">Income After Tax</button><button id="reqBtn">Required Income</button>
+        <div class="calculator">
             <div>
-                <label for="income">Income:</label>
-                <input type="number" name="income" id="income">
-                <select id="incomeUnit">
-                    <option value="1">annual</option>
-                    <option value="12">monthly</option>
-                </select>
+                <input type="checkbox" name="selfEmployed" id="selfEmployed">
+                <label for="selfEmployed">Self employed</label>
             </div>
-            <div>
-                <span>Income after tax:</span>
-                <span id="incomeAfterTax">0</span>
-                <select id="afterTaxUnit">
-                    <option value="1">annual</option>
-                    <option value="12">monthly</option>
-                </select>
+            <div id="afterTaxCalc">
+                <div>
+                    <label for="income">Income:</label>
+                    <input type="number" name="income" id="income">
+                    <select id="incomeUnit">
+                        <option value="1">annual</option>
+                        <option value="12">monthly</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Income after tax:</span>
+                    <span id="incomeAfterTax">0</span>
+                    <select id="afterTaxUnit">
+                        <option value="1">annual</option>
+                        <option value="12">monthly</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div id="reqCalc" style="display: none;">
-            <div>
-                <label for="desiredIncome">Desired income:</label>
-                <input type="number" name="desiredIncome" id="desiredIncome">
-                <select id="desiredUnit">
-                    <option value="1">annual</option>
-                    <option value="12">monthly</option>
-                </select>
-            </div>
-            <div>
-                <span>Required income:</span>
-                <span id="requiredIncome">0</span>
-                <select id="requiredUnit">
-                    <option value="1">annual</option>
-                    <option value="12">monthly</option>
-                </select>
+            <div id="reqCalc" style="display: none;">
+                <div>
+                    <label for="desiredIncome">Desired income:</label>
+                    <input type="number" name="desiredIncome" id="desiredIncome">
+                    <select id="desiredUnit">
+                        <option value="1">annual</option>
+                        <option value="12">monthly</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Required income:</span>
+                    <span id="requiredIncome">0</span>
+                    <select id="requiredUnit">
+                        <option value="1">annual</option>
+                        <option value="12">monthly</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
