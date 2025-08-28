@@ -5,21 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tax Calculator</title>
+    <script src="scripts.js" defer></script>
 </head>
 
 <body>
     <div>
-        <span>Desired </span><select name="" id="">
-            <option value="">annual</option>
-            <option value="">monthly</option>
-        </select><span> income: $</span>
+        <label for="desiredIncome">Desired Income:</label>
+        <input type="text" name="desiredIncome" id="desiredIncome">
+        <select name="unit" id="desiredUnit">
+            <option value="da">annual</option>
+            <option value="dm">monthly</option>
+        </select>
     </div>
     <div>
-        <span>Required </span><select name="" id="">
-            <option value="">annual</option>
-            <option value="">monthly</option>
-        </select><span> income: $</span>
+        <span>Required Income:</span>
+        <span id="requiredIncome"></span>
+        <select name="unit" id="requiredUnit">
+            <option value="ra">annual</option>
+            <option value="rm">monthly</option>
+        </select>
     </div>
+    <div>
+        <input type="checkbox" name="selfEmployed" id="selfEmployed">
+        <label for="selfEmployed">Self Employed</label>
+    </div>
+    <button id="calculate">Calculate</button>
 </body>
 
 </html>
