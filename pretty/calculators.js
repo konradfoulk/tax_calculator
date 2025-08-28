@@ -58,7 +58,7 @@ export function findTaxedIncome(income, selfEmployed) {
     return income - incomeTax - ficaTax
 }
 
-export function findRequiredIncome(desiredIncome, selfEmployed, tolerance = 1) {
+export function findRequiredIncome(desiredIncome, selfEmployed, tolerance = 0.001) {
     const highestRate = brackets[-1][-1]
 
     let low = desiredIncome

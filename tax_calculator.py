@@ -60,7 +60,7 @@ def get_taxed_income(income, self_employed=False):
 
 
 # find required income before tax for an inputted desired income
-def find_required_income(desired_income, self_employed=False, tolerance=1):
+def find_required_income(desired_income, self_employed=False, tolerance=0.001):
     highest_rate = brackets[-1][-1]
 
     # using binary search to search through solutions to the after tax income
