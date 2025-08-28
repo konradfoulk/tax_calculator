@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from tax_calculator import find_required_income
+from v1.tax_calculator import find_required_income
 
 
 # find required income and populate into GUI
